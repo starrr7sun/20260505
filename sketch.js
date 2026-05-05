@@ -16,7 +16,7 @@ const MASK = {
 };
 
 function preload() {
-  maskImage = loadImage('4379902.png');
+  maskImage = loadImage('4379901.png');
 }
 
 function setup() {
