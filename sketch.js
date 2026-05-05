@@ -17,7 +17,7 @@ const MASK = {
 
 function preload() {
   // 請確認你的檔案名稱是 4379901 還是 4379902
-  maskImage = loadImage('433951.png');
+  maskImage = loadImage('4379901.png');
 }
 
 function setup() {
