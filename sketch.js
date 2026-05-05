@@ -39,11 +39,17 @@ function setup() {
 
 function draw() {
   // ── 主 canvas：攝影機畫面（鏡射）──
-  background(30);
+  background('#003049');
+
+  let vidW = width * 0.5;
+  let vidH = height * 0.5;
+  let startX = (width - vidW) / 2;
+  let startY = (height - vidH) / 2;
+
   push();
   translate(width, 0);
   scale(-1, 1);
-  image(video, 0, 0, width, height);
+  image(video, startX, startY, vidW, vidH);
   pop();
 
   if (predictions.length === 0) return;
@@ -51,8 +57,8 @@ function draw() {
   let pts = predictions[0].keypoints;
 
   // 座標轉換（含水平鏡射）
-  const getX = (x) => map(x, 0, video.width, width, 0);
-  const getY = (y) => map(y, 0, video.height, 0, height);
+  const getX = (x) => map(x, 0, video.width, startX + vidW, startX);
+  const getY = (y) => map(y, 0, video.height, startY, startY + vidH);
 
   // ── 人臉關鍵點 ──
   // 瞳孔：468=左瞳, 473=右瞳（MediaPipe refinement landmarks）
