@@ -285,5 +285,7 @@ function drawHUD() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  offscreen.resizeCanvas(windowWidth, windowHeight);
+  if (offscreen) {
+    offscreen.resizeCanvas(windowWidth, windowHeight);
+  }
 }
