@@ -16,6 +16,7 @@ const MASK = {
 };
 
 function preload() {
+  // 請確認你的檔案名稱是 4379901 還是 4379902
   maskImage = loadImage('4379901.png');
 }
 
@@ -88,6 +89,11 @@ function draw() {
   let offsetX = MASK.eyeMidU * drawW;
   let offsetY = MASK.eyeMidV * drawH;
 
+  // 檢查圖片是否載入成功，避免 404 導致後續程式碼崩潰
+  if (!maskImage || !maskImage.canvas || maskImage.width <= 1) {
+    return;
+  }
+
   // ── 離屏 canvas：畫臉譜 + clip 挖空 ──
   let og = offscreen.drawingContext;
   offscreen.clear(); // 清空為完全透明
@@ -145,5 +151,8 @@ function draw() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  offscreen.resizeCanvas(windowWidth, windowHeight);
+  // 檢查 offscreen 是否已在 setup 中建立，避免初始化前縮放視窗導致錯誤
+  if (offscreen) {
+    offscreen.resizeCanvas(windowWidth, windowHeight);
+  }
 }
